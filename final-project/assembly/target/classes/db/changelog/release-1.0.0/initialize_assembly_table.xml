@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet author="SSMironova" id="create_assembly_opty_table">
+        <createTable tableName="assembly_opty" remarks="Таблица с данными о сборке заказов" schemaName="public">
+            <column name="id" type="varchar(50)" remarks="Уникальный идентификатор записи">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="created" type="date" remarks="Дата заказа">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_id" type="varchar(50)" remarks="Уникальный идентификатор заказа">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="varchar(30)" remarks="Статус заказа">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable  cascadeConstraints="true"
+                        catalogName="orders"
+                        schemaName="public"
+                        tableName="assembly_opty"/>
+        </rollback>
+        <comment>
+            Первичная инициализация таблицы assembly_opty для сборки заказа
+        </comment>
+    </changeSet>
+</databaseChangeLog>

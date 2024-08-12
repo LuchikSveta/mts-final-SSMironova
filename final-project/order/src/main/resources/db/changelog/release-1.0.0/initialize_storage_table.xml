@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet author="SSMironova" id="create_storage_table">
+        <createTable tableName="storage" remarks="Таблица с данными о товарах на складе" schemaName="public">
+            <column name="id" type="varchar(30)" remarks="Уникальный идентификатор записи">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="product_code" type="varchar(20)" remarks="Код продукта">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="int" remarks="Количество">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable  cascadeConstraints="true"
+                        catalogName="orders"
+                        schemaName="public"
+                        tableName="storage"/>
+        </rollback>
+        <comment>
+            Первичная инициализация таблицы storage
+        </comment>
+        <loadData tableName="storage" file="db/changelog/data/init_storage_data.csv"/>
+    </changeSet>
+</databaseChangeLog>

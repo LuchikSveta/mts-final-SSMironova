@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet author="SSMironova" id="create_orders_table">
+        <createTable tableName="orders" remarks="Таблица с данными о заказах" schemaName="public">
+            <column name="id" type="varchar(50)" remarks="Уникальный идентификатор записи">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="created" type="date" remarks="Дата заказа">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="varchar(30)" remarks="Статус заказа">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_code" type="varchar(20)" remarks="Код продукта">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="int" remarks="Количество">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fio" type="varchar(255)" remarks="ФИО">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" type="varchar(20)" remarks="Номер телефона">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(255)" remarks="Email">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="varchar(255)" remarks="Адрес">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable  cascadeConstraints="true"
+                        catalogName="orders"
+                        schemaName="public"
+                        tableName="orders"/>
+        </rollback>
+        <comment>
+            Первичная инициализация таблицы orders
+        </comment>
+    </changeSet>
+</databaseChangeLog>

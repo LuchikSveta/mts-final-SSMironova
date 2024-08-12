@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: process
+  datasource:
+    url: jdbc:postgresql://localhost:5432/orders
+    username: admin
+    password: admin
+    driverClassName: org.postgresql.Driver
+camunda:
+  bpm:
+    admin-user:
+      id: admin
+      password: admin
+    deployment-resource-pattern: classpath:/bpmn/final.bpmn
+    application:
+      delete-upon-undeploy: false
+      scan-for-process-definitions: false
+      deploy-changed-only: true
+      resume-previous-versions: true
+      resume-previous-by: a value
+    job-execution:
+      enabled: true
+    metrics:
+      enabled: false
+      db-reporter-activate: false
+server:
+  port: 8082
+logging:
+  level:
+    root: INFO
+    org:
+      apache:
+        kafka: WARN
